@@ -39,7 +39,7 @@ public class PrologueHandle : MonoBehaviour
         if(!bools[0]) {
             StartCoroutine("FirstScene");
         } else if(!bools[1]) {
-            StartCoroutine("SecondScene");
+            //StartCoroutine("SecondScene");
         }
 
         // firstly make visible screen
@@ -54,7 +54,6 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator FirstScene() {
         // setup all stuff
         cam.SetPoint(firstSceneCameraTransforms[0]);
-        PlayerHandle.Instance.anim.SetBool("isSlave", true);
 
         // we are inside
         insideCorutine = true;
@@ -65,9 +64,9 @@ public class PrologueHandle : MonoBehaviour
                 if(blackScreen.color.a > 0) {
                     blackScreen.color = new Color(0, 0, 0, (2f - startTimer));
                 }
-            } else if(startTimer >= 9f && startTimer < 11f) {
+            } else if(startTimer >= 7f && startTimer < 9f) {
                 if(blackScreen.color.a < 1) {
-                    blackScreen.color = new Color(0, 0, 0, (-9f + startTimer));
+                    blackScreen.color = new Color(0, 0, 0, (-7f + startTimer));
                 }
             }
 
@@ -85,7 +84,6 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator SecondScene() {
         // setup all stuff
         cam.SetPoint(secondSceneCameraTransforms[0]);
-        PlayerHandle.Instance.anim.SetBool("isSlave", true);
 
         // we are inside
         insideCorutine = true;
