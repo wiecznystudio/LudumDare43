@@ -13,7 +13,12 @@ public class AIHandle : MonoBehaviour
     private bool isMoving;
     private Vector3 navDestination;
 
+
     // functions
+    private void Awake() {
+        agent.enabled = false;
+
+    }
     void Update() {
         if(!agent.enabled)
             return;
