@@ -17,7 +17,7 @@ public class PlayerHandle : MonoBehaviour
     // functions
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButton(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
