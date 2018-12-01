@@ -14,9 +14,9 @@ public class PrologueHandle : MonoBehaviour
     // functions
 
     private void Start() {
-        blackScreen.color = new Color(0, 0, 0, 1);
+        //blackScreen.color = new Color(0, 0, 0, 1);
         for(int i = 0; i < bools.Length; i++)
-            bools[i] = false;
+            bools[i] = true;
     }
 
     void Update()
@@ -34,7 +34,7 @@ public class PrologueHandle : MonoBehaviour
                 bools[0] = true;
             }
         }
-        else if(startTimer >= 1f) {
+        if(startTimer >= 1f) {
             if(blackScreen.color.a > 0) {
                 blackScreen.color = new Color(0, 0, 0, (2f - startTimer));
             }
