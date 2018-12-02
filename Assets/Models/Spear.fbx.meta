@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: 136eff92c9a838b4e80891fdfd9536c6
+guid: 08946526f1daebc4188c08f7d8557f3d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material.003
-    2100002: Trawa
+    2100000: Dzida
+    2100002: Grot
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Plane
+    4300000: Cylinder
+    6400000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -43,12 +44,12 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
-    importVisibility: 1
+    importVisibility: 0
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -65,8 +66,8 @@ ModelImporter:
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0

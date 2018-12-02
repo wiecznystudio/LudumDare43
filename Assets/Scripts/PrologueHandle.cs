@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class PrologueHandle : MonoBehaviour
 {
@@ -12,13 +14,13 @@ public class PrologueHandle : MonoBehaviour
 
     [Header("Scene Transforms")]
     public Transform[] firstSceneCameraTransforms;
-    public float timesFirstTransforms;
     public Transform[] secondSceneCameraTransforms;
-    public float timesSecondTransforms;
+    public PlayableDirector secondTimeline;
 
     private float startTimer = 0f;
     private bool[] bools = new bool[10];
     private bool insideCorutine = false;
+    private bool changeScene = false;
 
     // functions
     private void Start() {
@@ -39,6 +41,8 @@ public class PrologueHandle : MonoBehaviour
         if(!bools[0]) {
             StartCoroutine("FirstScene");
         } else if(!bools[1]) {
+            StartCoroutine("SecondScene");
+        } else if(!bools[2]) {
             //StartCoroutine("SecondScene");
         }
 
@@ -54,6 +58,7 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator FirstScene() {
         // setup all stuff
         cam.SetPoint(firstSceneCameraTransforms[0]);
+        RenderSettings.fog = true;
 
         // we are inside
         insideCorutine = true;
@@ -67,12 +72,13 @@ public class PrologueHandle : MonoBehaviour
             } else if(startTimer >= 7f && startTimer < 9f) {
                 if(blackScreen.color.a < 1) {
                     blackScreen.color = new Color(0, 0, 0, (-7f + startTimer));
-                }
+                } else changeScene = true;
             }
 
             // close coroutine when camera is near point 2
-            if(cam.ToPoint(firstSceneCameraTransforms[1], 0.01f)) {
+            if(cam.ToPoint(firstSceneCameraTransforms[1], 0.005f) && changeScene) {
                 insideCorutine = false;
+                changeScene = false;
                 startTimer = 0f;
                 bools[0] = true;
             }
@@ -87,6 +93,7 @@ public class PrologueHandle : MonoBehaviour
 
         // we are inside
         insideCorutine = true;
+        secondTimeline.Play();
 
         while(!bools[1]) {
             // change screen black
@@ -97,12 +104,13 @@ public class PrologueHandle : MonoBehaviour
             } else if(startTimer >= 9f && startTimer < 11f) {
                 if(blackScreen.color.a < 1) {
                     blackScreen.color = new Color(0, 0, 0, (-9f + startTimer));
-                }
+                } else changeScene = true;
             }
 
             // close coroutine when camera is near point 2
-            if(cam.ToPoint(secondSceneCameraTransforms[1], 0.005f)) {
+            if(cam.ToPoint(secondSceneCameraTransforms[1], 0.005f) && changeScene) {
                 insideCorutine = false;
+                changeScene = false;
                 startTimer = 0f;
                 bools[1] = true;
             }
