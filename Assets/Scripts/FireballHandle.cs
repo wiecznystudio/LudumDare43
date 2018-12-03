@@ -43,6 +43,7 @@ public class FireballHandle : MonoBehaviour
     private void Explode() {
         fireBall.gameObject.SetActive(false);
         fireTrail.GetComponent<ParticleSystem>().Stop();
+        AudioHandle.Instance.AudioPlay(1, false);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
 

@@ -91,6 +91,7 @@ public class PrologueHandle : MonoBehaviour
         postProccess.profile.TryGetSettings(out colorGrading);
         colorGrading.colorFilter.value = new Vector4(0.1367925f, 0.1514248f, 1.0f);
         RenderSettings.fog = true;
+        AudioHandle.Instance.AudioPlay(0);
 
         while(!bools[0]) {
             storyHandler.transform.position += new Vector3(0.05f, 0);
@@ -278,6 +279,7 @@ public class PrologueHandle : MonoBehaviour
             } else if(startTimer >= 11.15f && startTimer < 11.25f) {
                 storyText.text = "";
                 blackScreen.color = new Color(0, 0, 0, 1);
+                //AudioHandle.Instance.AudioStop(0);
             } else if(startTimer >= 12.5f && startTimer < 12.6f) {
                 therdObjectsToDisable.gameObject.active = false;
                 gameplayObjects.gameObject.active = true;
