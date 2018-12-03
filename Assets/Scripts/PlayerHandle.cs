@@ -29,7 +29,7 @@ public class PlayerHandle : MonoBehaviour
     private bool isMoving;
     private Vector3 navDestination;
 
-    private bool isControllable = true;
+    public bool isControllable = false;
 
     // functions
     void Update()
@@ -74,7 +74,7 @@ public class PlayerHandle : MonoBehaviour
 
 
     private void FireFIREBALL(Vector3 destination) {
-        GameObject fireball = Instantiate(fireballPrefab, this.transform.position + new Vector3(0, 10f, 0), Quaternion.identity);
+        GameObject fireball = Instantiate(fireballPrefab, this.transform.position + new Vector3(0, 15f, 0), Quaternion.identity);
         fireball.GetComponent<FireballHandle>().Target(destination);
     }
 }

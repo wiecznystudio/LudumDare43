@@ -7,6 +7,7 @@ public class CameraHandle : MonoBehaviour
     // variables
 
     public Transform destination;
+    public Vector3 rotation = Vector3.zero;
 
     [SerializeField]
     private float smoothAmount = 10f;
@@ -20,6 +21,7 @@ public class CameraHandle : MonoBehaviour
     private void Update() {
         if(destination == null)
             return;
+        else toPoint = false;
 
         if(toPoint)
             return;
@@ -27,6 +29,12 @@ public class CameraHandle : MonoBehaviour
         Vector3 newPosition = Vector3.Lerp(this.transform.position, destination.position + offset, smoothAmount);
 
         this.transform.position = newPosition;
+
+        if(rotation != Vector3.zero) {
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(rotation), 0.05f);
+            if(this.transform.rotation == Quaternion.Euler(rotation))
+                rotation = Vector3.zero;
+        }
     }
 
     public void SetPoint(Transform point) {

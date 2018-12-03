@@ -16,7 +16,14 @@ public class FireballHandle : MonoBehaviour
     private float explosionRange = 7f;
 
     // functions
+    private void Start() {
+        fireTrail.GetComponent<ParticleSystem>().Play();
+    }
+
     private void Update() {
+        if(targetDestination == null)
+            return;
+
         if(Vector3.Distance(this.transform.position, targetDestination) > 0.5f) {
             this.transform.position += velocity;
         } else {

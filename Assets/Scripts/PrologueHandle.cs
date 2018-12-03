@@ -18,12 +18,18 @@ public class PrologueHandle : MonoBehaviour
     public Transform[] firstSceneCameraTransforms;
     public Transform[] secondSceneCameraTransforms;
     public Transform[] therdSceneCameraTransforms;
+    public Transform lastSceneCameraTransform;
     public PlayableDirector firstTimeline;
     public PlayableDirector secondTimeline;
     public PlayableDirector therdTimeline;
     public PostProcessVolume postProccess;
     public StoryHandle storyHandler;
     public TMP_Text storyText;
+    public Transform firstObjectsToDisable;
+    public Transform secondObjectsToDisable;
+    public Transform therdObjectsToDisable;
+    public Transform gameplayObjects;
+    public GameplayHandle gameplay;
 
     private float startTimer = 0f;
     private bool[] bools = new bool[10];
@@ -58,6 +64,8 @@ public class PrologueHandle : MonoBehaviour
             StartCoroutine("BlackAfterSecond");
         } else if(!bools[5]) {
             StartCoroutine("TherdScene");
+        } else if(!bools[6]) {
+            gameplay.isActive = true;
         }
 
         // firstly make visible screen
@@ -74,12 +82,15 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator BlackBegin() {
         // we are inside
         insideCorutine = true;
+        firstObjectsToDisable.gameObject.active = true;
+        gameplayObjects.gameObject.active = false;
         storyHandler.gameObject.active = true;
         storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
         storyHandler.transform.position += new Vector3(-25f, 0);
         ColorGrading colorGrading = null;
         postProccess.profile.TryGetSettings(out colorGrading);
-        colorGrading.colorFilter.value = new Color(35, 39, 255);
+        colorGrading.colorFilter.value = new Vector4(0.1367925f, 0.1514248f, 1.0f);
+        RenderSettings.fog = true;
 
         while(!bools[0]) {
             storyHandler.transform.position += new Vector3(0.05f, 0);
@@ -108,6 +119,7 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator BlackAfterFirst() {
         // we are inside
         insideCorutine = true;
+        secondObjectsToDisable.gameObject.active = true;
         storyHandler.gameObject.active = true;
         storyHandler.transform.position += new Vector3(-25f, 0);
         storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
@@ -131,6 +143,7 @@ public class PrologueHandle : MonoBehaviour
                 bools[2] = true;
                 storyHandler.SetStoryText("", "");
                 storyHandler.gameObject.active = false;
+                firstObjectsToDisable.gameObject.SetActive(false);
             }
             yield return null;
         }
@@ -139,12 +152,14 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator BlackAfterSecond() {
         // we are inside
         insideCorutine = true;
+        therdObjectsToDisable.gameObject.active = true;
         storyHandler.gameObject.active = true;
         storyHandler.transform.position += new Vector3(-240f, 0);
         storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
         ColorGrading colorGrading = null;
         postProccess.profile.TryGetSettings(out colorGrading);
-        colorGrading.colorFilter.value = new Color(86, 75, 176);
+        colorGrading.colorFilter.value = new Vector4(0.3372549f, 0.2941177f, 0.6901961f);
+        RenderSettings.fog = false;
 
         while(!bools[4]) {
             storyHandler.transform.position += new Vector3(0.05f, 0);
@@ -165,6 +180,7 @@ public class PrologueHandle : MonoBehaviour
                 bools[4] = true;
                 storyHandler.SetStoryText("", "");
                 storyHandler.gameObject.active = false;
+                secondObjectsToDisable.gameObject.SetActive(false);
             }
             yield return null;
         }
@@ -176,7 +192,6 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator FirstScene() {
         // setup all stuff
         cam.SetPoint(firstSceneCameraTransforms[0]);
-        RenderSettings.fog = true;
         storyText.text = "hegegedg";
         // we are inside
         insideCorutine = true;
@@ -202,6 +217,7 @@ public class PrologueHandle : MonoBehaviour
                 changeScene = false;
                 startTimer = 0f;
                 bools[1] = true;
+                storyText.text = "";
             }
             yield return null;
         }
@@ -237,11 +253,11 @@ public class PrologueHandle : MonoBehaviour
                 changeScene = false;
                 startTimer = 0f;
                 bools[3] = true;
+                storyText.text = "";
             }
             yield return null;
         }
     }
-
 
     // therd scene
     IEnumerator TherdScene() {
@@ -259,21 +275,30 @@ public class PrologueHandle : MonoBehaviour
                     blackScreen.color = new Color(0, 0, 0, (1f - startTimer));
                     storyText.color = new Color(255, 255, 255, startTimer - 0.5f);
                 }
-            } else if(startTimer >= 8f && startTimer < 9.5f) {
-                if(blackScreen.color.a < 1) {
-                    blackScreen.color = new Color(0, 0, 0, (-8f + startTimer));
-                    storyText.color = new Color(255, 255, 255, 9f - startTimer);
-                } else changeScene = true;
+            } else if(startTimer >= 11.15f && startTimer < 11.25f) {
+                storyText.text = "";
+                blackScreen.color = new Color(0, 0, 0, 1);
+            } else if(startTimer >= 12.5f && startTimer < 12.6f) {
+                therdObjectsToDisable.gameObject.active = false;
+                gameplayObjects.gameObject.active = true;
+                changeScene = true;
             }
 
+            cam.ToPoint(therdSceneCameraTransforms[1], 0.01f);
             // close coroutine when camera is near point 2
             if(changeScene) {
+                cam.SetPoint(lastSceneCameraTransform);
                 insideCorutine = false;
                 changeScene = false;
                 startTimer = 0f;
                 bools[5] = true;
+                blackScreen.color = new Color(0, 0, 0, 0);
+                storyText.fontSize = 50;
+                storyText.alignment = TextAlignmentOptions.Center;
+                storyText.text = "Press F to SACRIFICE";
             }
             yield return null;
         }
     }
+
 }

@@ -13,7 +13,7 @@ public class AIHandle : MonoBehaviour
     private bool isMoving;
     private Vector3 navDestination;
 
-
+    private bool isDead = false;
     // functions
     private void Awake() {
         agent.enabled = false;
@@ -42,7 +42,12 @@ public class AIHandle : MonoBehaviour
     }
 
     public void Die() {
+        if(isDead)
+            return;
+
+        isDead = true;
         anim.SetBool("isMoving", false);
         agent.enabled = false;
+        GameplayHandle.Instance.UpdateAztec();
     }
 }
