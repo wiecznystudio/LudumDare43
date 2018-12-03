@@ -73,6 +73,7 @@ public class GameplayHandle : MonoBehaviour
         if(!endGame && killedAztec >= 20) {
             endGame = true;
             storyText.text = "";
+            aztecCount.text = "";
             timer = 0f;
         }
 
