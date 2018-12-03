@@ -85,7 +85,7 @@ public class PrologueHandle : MonoBehaviour
         firstObjectsToDisable.gameObject.active = true;
         gameplayObjects.gameObject.active = false;
         storyHandler.gameObject.active = true;
-        storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
+        storyHandler.SetStoryText("1524 - Herma Cortes", "We entered the territory of the Aztecs with a division of 500 warriors. This day will be remembered in the history of conquests.");
         storyHandler.transform.position += new Vector3(-25f, 0);
         ColorGrading colorGrading = null;
         postProccess.profile.TryGetSettings(out colorGrading);
@@ -122,7 +122,7 @@ public class PrologueHandle : MonoBehaviour
         secondObjectsToDisable.gameObject.active = true;
         storyHandler.gameObject.active = true;
         storyHandler.transform.position += new Vector3(-25f, 0);
-        storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
+        storyHandler.SetStoryText("second week of the expedition", "The eruption of the volcano forced us to separate. Following in the footsteps of the Aztecs, we were ambushed.");
 
         while(!bools[2]) {
             storyHandler.transform.position += new Vector3(0.05f, 0);
@@ -155,7 +155,7 @@ public class PrologueHandle : MonoBehaviour
         therdObjectsToDisable.gameObject.active = true;
         storyHandler.gameObject.active = true;
         storyHandler.transform.position += new Vector3(-240f, 0);
-        storyHandler.SetStoryText("1254 - Horces Cortes", "cos tam cos tam");
+        storyHandler.SetStoryText("???", "Their habits are terrifying. The best warriors from the tribe are stripped of their skin, and they are tearing out their hearts as gift to their god.");
         ColorGrading colorGrading = null;
         postProccess.profile.TryGetSettings(out colorGrading);
         colorGrading.colorFilter.value = new Vector4(0.3372549f, 0.2941177f, 0.6901961f);
@@ -192,7 +192,7 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator FirstScene() {
         // setup all stuff
         cam.SetPoint(firstSceneCameraTransforms[0]);
-        storyText.text = "hegegedg";
+        storyText.text = "I woke up when I was dragged by two tribes men. I didn't know where I was or where they were taking me.";
         // we are inside
         insideCorutine = true;
         firstTimeline.Play();
@@ -228,7 +228,7 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator SecondScene() {
         // setup all stuff
         cam.SetPoint(secondSceneCameraTransforms[0]);
-        storyText.text = "asdasdasd";
+        storyText.text = "They threw me into the cage like trash. After their smiles I concluded that I was a good prey.";
         // we are inside
         insideCorutine = true;
         secondTimeline.Play();
@@ -263,7 +263,7 @@ public class PrologueHandle : MonoBehaviour
     IEnumerator TherdScene() {
         // setup all stuff
         cam.SetPoint(therdSceneCameraTransforms[0]);
-        storyText.text = "zxcvbfb";
+        storyText.text = "Apparently I became the icing on the cake, they are going to cut off my head as the last ...";
         // we are inside
         insideCorutine = true;
         therdTimeline.Play();

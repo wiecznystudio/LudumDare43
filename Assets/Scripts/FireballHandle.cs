@@ -12,8 +12,8 @@ public class FireballHandle : MonoBehaviour
     private Vector3 targetDestination;
     private Vector3 velocity;
 
-    private float explosionForce = 80f;
-    private float explosionRange = 7f;
+    private float explosionForce = 200f;
+    private float explosionRange = 10f;
 
     // functions
     private void Start() {

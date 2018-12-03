@@ -16,17 +16,19 @@ public class AIHandle : MonoBehaviour
     private bool isDead = false;
     // functions
     private void Awake() {
-        agent.enabled = false;
+        //agent.enabled = false;
 
     }
     void Update() {
         if(!agent.enabled)
             return;
-
-        SetDestination(PlayerHandle.Instance.transform.position);
+        
+        if(!isMoving) {
+            SetDestination(this.transform.position + (new Vector3(Random.insideUnitCircle.x, 0, Random.insideUnitCircle.y) * 5f));
+        }
 
         if(isMoving) {
-            if(Vector3.Distance(this.transform.position, navDestination) <= 2f) {
+            if(Vector3.Distance(this.transform.position, navDestination) <= 4f) {
                 anim.SetBool("isMoving", false);
                 isMoving = false;
             }

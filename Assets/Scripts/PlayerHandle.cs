@@ -52,7 +52,7 @@ public class PlayerHandle : MonoBehaviour
         }
 
         if(isMoving) {
-            if(Vector3.Distance(this.transform.position, navDestination) <= 2f) {
+            if(Vector3.Distance(this.transform.position, navDestination) <= 4f) {
                 anim.SetBool("isMoving", false);
                 isMoving = false;
             }
